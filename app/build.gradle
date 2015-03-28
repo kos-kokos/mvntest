@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'maven'
+
+def version = "1.0.5"
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'commons-io:commons-io:2.4'
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    packagingOptions {
+        exclude 'META-INF/LICENCE.txt'
+    }
+
+    defaultConfig {
+        applicationId "ru.einster.mvntest"
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionCode 4
+        versionName version
+    }
+    signingConfigs {
+        release {
+            storeFile file("release-key.keystore")
+            storePassword "123456"
+            keyAlias "key"
+            keyPassword "123456"
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+task deployArchives(type: Upload) {
+    description "Deploy the artifacts to the remote Maven repository."
+    configuration = configurations['archives']
+    repositories {
+        mavenDeployer {
+            repository(url: "http://192.168.1.83:8081/nexus/content/repositories/releases"){
+                authentication(userName: "deployment", password: "deployment")
+            }
+            pom.version = version
+            pom.artifactId = 'mvntest'
+            pom.groupId = 'ru.einster'
+        }
+    }
+}

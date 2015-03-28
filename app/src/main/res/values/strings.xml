@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MvnTest</string>
+
+    <string name="current_version">Текущая версия</string>
+    <string name="unknown_version">0.0.0</string>
+    <string name="check_for_update">Проверить обновления</string>
+    <string name="repository_url">http://192.168.1.83:8081/nexus/content/repositories/releases</string>
+    <string name="artifact_group">ru.einster</string>
+    <string name="artifact_id">mvntest</string>
+    <string name="install_version">Установить версию %s ?</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Отмена</string>
+    <string name="download_title">Загрузка mvntest</string>
+    <string name="no_updates">Обновлений не найдено</string>
+</resources>
